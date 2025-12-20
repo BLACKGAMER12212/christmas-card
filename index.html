@@ -1129,10 +1129,10 @@
     let isUnlocked = false;
 
     // Dòng này dùng để test nhanh (hết countdown sau 2 phút)
-    //const christmasDate = new Date(Date.now() + 12000).getTime();
+    const christmasDate = new Date(Date.now() + 12000).getTime();
 
     // Khi dùng thật vào Giáng sinh 2025, bỏ comment dòng dưới và comment dòng trên
-    const christmasDate = new Date('2025-12-24T00:00:00').getTime();
+    //const christmasDate = new Date('2025-12-24T00:00:00').getTime();
 
     const countdownElement = document.getElementById('countdown');
     const greetingTitle = document.querySelector('#home h1');
@@ -1462,3 +1462,4 @@
 </body>
 
 </html>
+
