@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kỷ Niệm Giáng Sinh Với Em ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Dancing Script', cursive;
+            background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('img_bg.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            text-align: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+/* Thanh scroll đẹp */
+.back .message-wrapper::-webkit-scrollbar {
+    width: 8px;
+}
+.back .message-wrapper::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.2);
+    border-radius: 10px;
+}
+.back .message-wrapper::-webkit-scrollbar-thumb {
+    background: #ffd700;
+    border-radius: 10px;
+}
+.back .message-wrapper::-webkit-scrollbar-thumb:hover {
+    background: gold;
+}
+
+        /* MENU */
+        .christmas-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #001133;
+            padding: 20px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+            z-index: 1000;
+        }
+        .menu-items {
+            display: flex;
+            justify-content: center;
+            gap: 90px;
+            font-size: 2.4em;
+        }
+        .menu-items a {
+            color: #ffd700;
+            text-decoration: none;
+            text-shadow: 0 0 15px gold;
+            transition: 0.5s;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        .menu-items a .icon {
+            font-size: 1.2em;
+            animation: pulse 2s infinite;
+        }
+        .menu-items a.active {
+            color: white;
+            text-shadow: 0 0 30px red;
+        }
+        .menu-items a:hover {
+            transform: translateY(-8px) scale(1.15);
+            color: white;
+            text-shadow: 0 0 40px red;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+
+        .content-wrapper {
+            margin-top: 90px;
+        }
+
+        section {
+            position: absolute;
+            top: 90px;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.8s ease;
+        }
+
+        section.active {
+            position: relative;
+            opacity: 1;
+            visibility: visible;
+            z-index: 1;
+        }
+
+        /* HOME */
+        #home .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            perspective: 2500px;
+            padding-top: 20px;
+        }
+
+        #home h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 5.5em;
+            color: #ffd700;
+            text-shadow: 0 0 25px #ff0000, 0 0 50px gold;
+            margin-bottom: 30px;
+            z-index: 2;
+        }
+
+        /* COUNTDOWN */
+        #countdown {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4em;
+            color: #ffd700;
+            text-shadow: 0 0 30px #ff0000, 0 0 60px gold;
+            margin: 20px 0 50px;
+            animation: glow 2s infinite alternate;
+        }
+
+        .countdown-item {
+            display: inline-block;
+            margin: 0 20px;
+        }
+
+        .countdown-number {
+            font-size: 1.8em;
+            display: block;
+            color: white;
+            text-shadow: 0 0 20px red;
+        }
+
+        .countdown-label {
+            font-size: 0.6em;
+            color: #ff6b6b;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px #ff0000, 0 0 40px gold; }
+            to { text-shadow: 0 0 40px #ff0000, 0 0 80px gold; }
+        }
+
+        /* MODAL CẢNH BÁO KHI CHƯA TỚI GIỜ */
+        #warningOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0);
+            z-index: 3998;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease;
+        }
+
+        #warningOverlay.active {
+            opacity: 1;
+            visibility: visible;
+            background: rgba(0,0,0,0.6);
+        }
+
+        #warningModal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.7);
+            width: 90%;
+            max-width: 600px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 80px rgba(255,215,0,0.8);
+            z-index: 3999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #warningModal.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        #warningModal h3 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4em;
+            color: #d40000;
+            text-shadow: 0 0 20px gold;
+            margin-bottom: 30px;
+        }
+
+        #warningModal p {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        #countdownWarning {
+            margin: 20px 0 40px;
+            font-size: 3em;
+        }
+
+        #closeWarningBtn {
+            padding: 15px 40px;
+            font-size: 2em;
+            background: linear-gradient(45deg, #ff0000, #ff6b6b);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 0 30px rgba(255,0,0,0.6);
+            transition: 0.3s;
+        }
+
+        #closeWarningBtn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 50px rgba(255,0,0,0.8);
+        }
+
+        /* THIỆP */
+        .card-container {
+            position: relative;
+            width: 420px;
+            height: 546px;
+            transition: width 0.8s ease, transform 0.8s ease;
+            transform-style: preserve-3d;
+            z-index: 1;
+            cursor: pointer;
+            margin: 0 auto;
+        }
+
+        .card-container.unlocked:hover {
+            width: 900px;
+        }
+
+        .card {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .card-container.unlocked:hover .card {
+            transform: rotateY(-180deg);
+        }
+
+        .front, .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.9);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .front {
+            background: url('thumbnail.png') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            padding-bottom: 30px;
+        }
+
+        #message .front {
+            background: url('gift_out.png') center/cover no-repeat;
+        }
+
+        .front .hint {
+            font-size: 1.6em;
+            color: #fff;
+            background: rgba(0,0,0,0.5);
+            padding: 10px 25px;
+            border-radius: 20px;
+            text-shadow: 0 0 10px black;
+        }
+
+        .back {
+            background: url('in_thumbnail.png') center/cover no-repeat;
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 50px 80px;
+            overflow: hidden;
+        }
+
+        .back .message-wrapper {
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            padding-right: 15px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .back .message {
+            font-size: 2.0em;
+            line-height: 1.8;
+            color: #4a1a1a;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.6);
+            text-align: left;
+            max-width: 100%;
+        }
+
+        .back .signature {
+            margin-top: 40px;
+            text-align: right;
+            width: 100%;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        #message .back .message {
+            font-size: 2.4em;
+        }
+
+        #message .back .signature {
+            font-size: 1.4em;
+            margin-top: 50px;
+        }
+
+        #revealReplyBtn {
+            position: absolute;
+            bottom: -300px;
+            left: 40px;
+            padding: 10px 25px;
+            font-size: 1.5em;
+            background: rgba(255,0,0,0.85);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(255,0,0,0.7);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 10;
+        }
+
+        #revealReplyBtn.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #revealReplyBtn:hover {
+            transform: scale(1.1);
+            background: red;
+            box-shadow: 0 0 40px rgba(255,0,0,0.9);
+        }
+
+        /* MODAL GỬI LỜI CHÚC */
+        #replyOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0);
+            z-index: 1999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease;
+        }
+
+        #replyOverlay.active {
+            opacity: 1;
+            visibility: visible;
+            background: rgba(0,0,0,0.6);
+        }
+
+        #replyModal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.7);
+            width: 90%;
+            max-width: 600px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 80px rgba(255,215,0,0.8);
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #replyModal.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        #replyModal h3 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4em;
+            color: #d40000;
+            text-shadow: 0 0 20px gold;
+            margin-bottom: 30px;
+        }
+
+        #replyTextarea {
+            width: 100%;
+            height: 180px;
+            padding: 20px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2em;
+            border: 4px solid #ff6b6b;
+            border-radius: 20px;
+            background: white;
+            color: #333;
+            resize: none;
+            box-sizing: border-box;
+            margin-bottom: 30px;
+        }
+
+        #sendReplyBtn {
+            padding: 15px 40px;
+            font-size: 2em;
+            background: linear-gradient(45deg, #ff0000, #ff6b6b);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 0 30px rgba(255,0,0,0.6);
+            transition: 0.3s;
+        }
+
+        #sendReplyBtn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 50px rgba(255,0,0,0.8);
+        }
+
+        #replyMessage {
+            margin-top: 30px;
+            font-size: 2.5em;
+            color: #d40000;
+            text-shadow: 0 0 20px gold;
+            display: none;
+        }
+
+        /* MODAL ẢNH */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0);
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+            background-color: rgba(0,0,0,0.85);
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 20px;
+            box-shadow: 0 0 80px rgba(255,215,0,0.8);
+            object-fit: contain;
+            transform: scale(0.7);
+            opacity: 0;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease;
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .close {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 50px;
+            cursor: pointer;
+            text-shadow: 0 0 20px red, 0 0 30px gold;
+            z-index: 2100;
+            background: rgba(0,0,0,0.6);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.3s;
+        }
+
+        .close:hover {
+            transform: scale(1.2);
+            background: rgba(139,0,0,0.8);
+        }
+
+        /* NÚT LOAD THÊM */
+        #loadMoreBtn {
+            margin: 80px auto 200px;
+            padding: 15px 50px;
+            font-size: 2.5em;
+            background: linear-gradient(45deg, #ff6b6b, #ff0000);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 40px rgba(255,0,0,0.6);
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        #loadMoreBtn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 60px rgba(255,0,0,0.8);
+        }
+
+        /* MODAL HẾT MẤT RỒI */
+        #endGalleryOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0);
+            z-index: 2999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease;
+        }
+
+        #endGalleryOverlay.active {
+            opacity: 1;
+            visibility: visible;
+            background: rgba(0,0,0,0.7);
+        }
+
+        #endGalleryModal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.7);
+            width: 90%;
+            max-width: 700px;
+            background: rgba(255,255,255,0.98);
+            border-radius: 40px;
+            padding: 50px;
+            box-shadow: 0 20px 100px rgba(255,215,0,0.9);
+            z-index: 3000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+        }
+
+        #endGalleryModal.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        #endGalleryModal p {
+            font-size: 2.8em;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 50px;
+            text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
+        }
+
+        #endGalleryModal .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+        }
+
+        #endGalleryModal button {
+            padding: 15px 50px;
+            font-size: 2.2em;
+            border: none;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 30px rgba(0,0,0,0.2);
+        }
+
+        #yesBtn {
+            background: linear-gradient(45deg, #ff6b6b, #ff0000);
+            color: white;
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 50px rgba(255,0,0,0.8);
+        }
+
+        #noBtn {
+            background: linear-gradient(45deg, #4a1a1a, #8b4513);
+            color: white;
+        }
+
+        #noBtn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 50px rgba(139,69,19,0.8);
+        }
+
+        /* MODAL CẢM ƠN */
+        #thankYouOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0);
+            z-index: 3999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease;
+        }
+
+        #thankYouOverlay.active {
+            opacity: 1;
+            visibility: visible;
+            background: rgba(0,0,0,0.7);
+        }
+
+        #thankYouModal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.7);
+            width: 90%;
+            max-width: 700px;
+            background: rgba(255,255,255,0.98);
+            border-radius: 40px;
+            padding: 60px;
+            box-shadow: 0 20px 100px rgba(255,215,0,0.9);
+            z-index: 4000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+        }
+
+        #thankYouModal.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        #thankYouModal p {
+            font-size: 3.2em;
+            color: #d40000;
+            line-height: 1.6;
+            margin: 0;
+            text-shadow: 0 0 20px gold;
+        }
+
+        /* CÂY THÔNG */
+        .home-tree, .message-tree {
+            position: fixed;
+            bottom: 60px;
+            width: 220px;
+            z-index: 10;
+            animation: swayStrong 6s infinite ease-in-out;
+            filter: drop-shadow(0 0 40px rgba(255,215,0,0.8));
+            pointer-events: none;
+            display: none;
+        }
+
+        .home-tree-left, .message-tree-left { left: 50px; }
+        .home-tree-right, .message-tree-right { right: 50px; }
+
+        #home.active ~ .home-tree,
+        #message.active ~ .message-tree {
+            display: block;
+        }
+
+        @keyframes swayStrong {
+            0% { transform: rotate(0deg) translateY(0); }
+            25% { transform: rotate(6deg) translateY(-10px); }
+            50% { transform: rotate(0deg) translateY(0); }
+            75% { transform: rotate(-6deg) translateY(-10px); }
+            100% { transform: rotate(0deg) translateY(0); }
+        }
+
+        /* GALLERY */
+        #gallery h2, #message h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 5em;
+            color: #ffd700;
+            text-shadow: 0 0 25px #ff0000, 0 0 50px gold;
+            margin: 60px 0 20px 0;
+        }
+
+        .gallery-container {
+            position: relative;
+            min-height: 2200px;
+            margin: 0 auto;
+        }
+
+        .garland-row {
+            position: absolute;
+            width: 110%;
+            left: -5%;
+            pointer-events: none;
+            filter: drop-shadow(0 0 20px rgba(255,215,0,0.8));
+            opacity: 0.9;
+        }
+        .garland-row:nth-child(1) { top: 30px; }
+        .garland-row:nth-child(2) { top: 430px; opacity: 0.8; }
+        .garland-row:nth-child(3) { top: 830px; opacity: 0.85; }
+        .garland-row:nth-child(4) { top: 1230px; opacity: 0.9; }
+        .garland-row:nth-child(5) { top: 1630px; opacity: 0.8; }
+
+        .photos-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 60px;
+            padding: 100px 50px 100px;
+            position: relative;
+            z-index: 10;
+        }
+        .photo-frame {
+            width: 220px;
+            background: white;
+            padding: 15px 15px 20px 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+            transition: transform 0.6s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            transform: rotate(var(--rotate, 0deg));
+        }
+        .photo-frame img {
+            width: 100%;
+            height: auto;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            flex-grow: 1;
+        }
+        .photo-frame:hover {
+            transform: rotate(var(--rotate, 0deg)) scale(1.4);
+            z-index: 50;
+            box-shadow: 0 0 100px gold;
+        }
+
+        #message .message-content {
+            margin: 100px auto 200px;
+        }
+
+        .snowflake {
+            position: fixed;
+            top: -50px;
+            color: #fff;
+            font-size: 1.8em;
+            pointer-events: none;
+            animation: fall linear forwards;
+            z-index: 1500;
+            user-select: none;
+            will-change: transform;
+        }
+        @keyframes fall {
+            to { transform: translateY(110vh); }
+        }
+
+        #musicToggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.6);
+            border: 2px solid gold;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+            z-index: 200;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 20px gold;
+            transition: 0.3s;
+        }
+        #musicToggle:hover {
+            transform: scale(1.1);
+            background: rgba(139,0,0,0.7);
+        }
+
+        /* Thông báo xoay ngang cho mobile */
+        #rotateMessage {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            font-size: 2em;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 5000;
+            text-align: center;
+            padding: 20px;
+        }
+
+        #rotateMessage .icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            animation: rotateAnimation 2s infinite;
+        }
+
+        @keyframes rotateAnimation {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(90deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        /* Media queries cho mobile portrait */
+        @media screen and (max-width: 767px) {
+            /* Điều chỉnh chung cho mobile */
+            .christmas-menu {
+                padding: 10px 0;
+            }
+            .menu-items {
+                gap: 30px;
+                font-size: 1.8em;
+            }
+            #home h1 {
+                font-size: 3.5em;
+            }
+            #countdown {
+                font-size: 2.5em;
+            }
+            .countdown-item {
+                margin: 0 10px;
+            }
+            .card-container {
+                width: 100%;
+                height: auto;
+                max-width: 420px;
+            }
+            .card-container.unlocked:hover {
+                width: 100%;
+            }
+            .back {
+                padding: 30px 40px;
+            }
+            .back .message {
+                font-size: 1.6em;
+            }
+            #message .back .message {
+                font-size: 1.8em;
+            }
+            .photos-grid {
+                gap: 30px;
+                padding: 50px 20px;
+            }
+            .photo-frame {
+                width: 180px;
+            }
+            .home-tree, .message-tree {
+                width: 150px;
+                bottom: 30px;
+            }
+            .home-tree-left, .message-tree-left { left: 10px; }
+            .home-tree-right, .message-tree-right { right: 10px; }
+            #gallery h2, #message h2 {
+                font-size: 3.5em;
+            }
+            #loadMoreBtn {
+                font-size: 2em;
+                padding: 10px 30px;
+            }
+
+            /* Portrait mode: ẩn nội dung, hiện thông báo */
+            body.portrait #rotateMessage {
+                display: flex;
+            }
+            body.portrait > *:not(#rotateMessage) {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Thông báo xoay ngang -->
+<div id="rotateMessage">
+    <div class="icon">📱↔️</div>
+    <p>Vui lòng xoay ngang điện thoại để xem nội dung tốt hơn!</p>
+</div>
+
+<!-- MODAL CẢNH BÁO KHI CHƯA TỚI GIỜ -->
+<div id="warningOverlay"></div>
+<div id="warningModal">
+    <h3>Chưa đến Giáng sinh đâu em ơi 🎄</h3>
+    <p>Hãy chờ countdown về 00 nhé ❤️</p>
+    <div id="countdownWarning">
+        <div class="countdown-item">
+            <span class="countdown-number" id="daysWarning">00</span>
+            <span class="countdown-label">Ngày</span>
+        </div>
+        <div class="countdown-item">
+            <span class="countdown-number" id="hoursWarning">00</span>
+            <span class="countdown-label">Giờ</span>
+        </div>
+        <div class="countdown-item">
+            <span class="countdown-number" id="minutesWarning">00</span>
+            <span class="countdown-label">Phút</span>
+        </div>
+        <div class="countdown-item">
+            <span class="countdown-number" id="secondsWarning">00</span>
+            <span class="countdown-label">Giây</span>
+        </div>
+    </div>
+    <button id="closeWarningBtn">Đóng</button>
+</div>
+
+<!-- MENU -->
+<div class="christmas-menu">
+    <div class="menu-items">
+        <a href="#" onclick="trySwitchTab('home')" class="active"><span class="icon">🏠</span> Home</a>
+        <a href="#" onclick="trySwitchTab('gallery')"><span class="icon">🖼️</span> Gallery</a>
+        <a href="#" onclick="trySwitchTab('message')"><span class="icon">💌</span> Message</a>
+    </div>
+</div>
+
+<!-- HOME -->
+<section id="home" class="active">
+    <div class="content-wrapper">
+        <h1>Chúc Em Giáng Sinh Vui Vẻ ❤️❄️</h1>
+
+        <div id="countdown">
+            <div class="countdown-item">
+                <span class="countdown-number" id="days">00</span>
+                <span class="countdown-label">Ngày</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="hours">00</span>
+                <span class="countdown-label">Giờ</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="minutes">00</span>
+                <span class="countdown-label">Phút</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="seconds">00</span>
+                <span class="countdown-label">Giây</span>
+            </div>
+        </div>
+
+        <div class="card-container">
+            <div class="card">
+                <div class="front">
+                    <div class="hint">Di chuột vào để mở thiệp nhé!</div>
+                </div>
+                <div class="back">
+                    <div class="message-wrapper">
+                        <div class="message">
+                            Gửi em!<br>
+                            Chúc em có một mùa Giáng Sinh an lành. <br>
+                            Mình chỉ mong em được bình yên – bình yên trong lòng, trong suy nghĩ và trong cách em đối diện với mọi điều.<br>
+                            Giữa những ngày đông lạnh giá, mong em vẫn cảm nhận được sự ấm áp từ những điều dịu dàng mình dành riêng cho em.<br>
+                            Mình mong em luôn tin vào chính bản thân, tin rằng em xứng đáng với yêu thương chân thành và những điều tốt đẹp nhất.<br>
+                            Dù cuộc sống đôi khi khiến em mệt mỏi, thì Giáng sinh này hãy là khoảng lặng để em thở chậm hơn, mỉm cười nhiều hơn và thấy lòng nhẹ nhàng.<br>
+                            Chúc em một mùa Noel an lành, ấm áp và thật đẹp — theo cách rất riêng của em. 🎄<br><br>
+                            
+                            <div class="signature">
+                                Thương, nhớ em nhiều lắm❤️<br>
+                                Trí thối
+                            </div>
+                        </div>
+
+                        <button id="revealReplyBtn">💌 Gửi lời chúc lại</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+    <div class="content-wrapper">
+        <h2>Công Chúa Và Cứt Thối❤️</h2>
+
+        <div class="gallery-container">
+            <img src="bulb.png" class="garland-row">
+            <img src="bulb.png" class="garland-row">
+            <img src="bulb.png" class="garland-row">
+            <img src="bulb.png" class="garland-row">
+            <img src="bulb.png" class="garland-row">
+
+            <div class="photos-grid" id="photosGrid"></div>
+
+            <button id="loadMoreBtn">Load thêm ảnh 🎄</button>
+        </div>
+    </div>
+</section>
+
+<!-- MESSAGE -->
+<section id="message">
+    <div class="content-wrapper">
+        <h2>Lời Nhắn Đặc Biệt</h2>
+
+        <div class="card-container">
+            <div class="card">
+                <div class="front">
+                    <div class="hint">Di chuột vào để mở thư nhé! 💌</div>
+                </div>
+                <div class="back">
+                    <div class="message-wrapper">
+                        <div class="message">
+                            Gửi em!<br>
+
+                            Trí viết cho em những dòng này không phải để đòi hỏi một điều gì quá lớn lao, mà chỉ muốn nói với em những gì Trí luôn suy nghĩ bấy lâu nay.<br>
+                            Trí biết, năm lớp 12 với bao nhiêu áp lực thi cử và những chông chênh của tuổi trưởng thành đang đè nặng lên vai em. 
+                            Trí nhìn thấy tất cả, thấy những lúc em vui vẻ hồn nhiên gửi cho Trí tấm ảnh, nhưng cũng thấy cả những lúc em mệt mỏi đến mức muốn xù lông lên để đẩy mọi thứ ra xa.
+                             Những lúc ấy, em nói Trí phiền phức, nói không còn tình cảm, không muốn nhắn tin... Trí biết đó có thể chỉ là cách em phản ứng lại với những áp lực đang bủa vây mình.
+                             Nhưng em à, đừng gồng mình lên quá như vậy. Em không cần phải chịu đựng mọi thứ một mình đâu.<br>
+                             Em thường lo sợ chuyện hai đứa mình sẽ làm ảnh hưởng đến cảm xúc, đến việc học. Em sợ sự ràng buộc hay mất thời gian.
+                             Nhưng với Trí, yêu thương trưởng thành không có nghĩa là phải nhắn tin cho nhau suốt ngày, cũng không phải là những giận hờn vô cớ làm mất thời gian của nhau.<br>
+                             Tình cảm Trí dành cho em, đơn giản là sự hiện diện. Là để em biết rằng, giữa những ngày tháng quay cuồng này, luôn có một người sẵn sàng đứng đó làm chỗ dựa cho em.
+                             Là khi em mệt mỏi nhất, em biết mình có một nơi để được lắng nghe, được vỗ về, hoặc chỉ đơn giản là được im lặng bên cạnh nhau mà thấy lòng bình yên.<br>
+                             Em từng trách Trí lằng nhằng, không đi thẳng vào vấn đề. Nhưng thực lòng, mỗi lần Trí muốn đối diện để làm rõ hướng đi cho cả hai, thì em lại chọn cách né tránh, từ chối gặp mặt. 
+                             Sự im lặng hay những câu trả lời chung chung của em mới là điều khiến chúng mình day dứt mãi không thôi. Có lẽ đó mới là điều đang bào mòn năng lượng của hai ta đấy!<br>
+                             Trí vẫn ở đây, nhìn thấy cả những điều tồi tệ mà cuộc sống đang ném vào em, và Trí vẫn muốn ở lại để che chở, chăm sóc cho em. Đừng lấy lý do "không muốn gặp" để trốn tránh một quyết định nữa. 
+                             Hãy cho lòng mình một cơ hội để thành thật với nhau.<br>
+                            
+                            Nếu em cần một người đồng hành để bớt cô đơn trên chặng đường khó khăn này, Trí luôn ở đây. Còn nếu em thực sự muốn dừng lại, hãy dũng cảm nói với Trí một lời dứt khoát khi mình gặp mặt nhau.<br>
+                            Trí luôn sẵn sàng chờ đợi một câu trả lời thật tâm nhất từ em, dù nó là gì đi nữa.
+                            <div class="signature">
+                                Trí của em
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MODAL GỬI LỜI CHÚC -->
+<div id="replyOverlay"></div>
+<div id="replyModal">
+    <h3>Gửi lời chúc Giáng sinh lại cho mình nhé ❤️</h3>
+    <textarea id="replyTextarea" placeholder="Viết lời chúc của em ở đây..."></textarea>
+    <button id="sendReplyBtn">Gửi đi 💌</button>
+    <div id="replyMessage">Lời chúc của em đã bay đến mình rồi đấy! ❤️🎄 Cảm ơn em nhiều lắm!</div>
+</div>
+
+<!-- MODAL HẾT MẤT RỒI -->
+<div id="endGalleryOverlay"></div>
+<div id="endGalleryModal">
+    <p>Hết mất rồi! Em có muốn cùng đồng hành với mình, tiếp tục cố gắng, vì nhau để có thêm nhiều những tấm ảnh dễ thương này không?</p>
+    <div class="buttons">
+        <button id="yesBtn">Có chứ ❤️</button>
+        <button id="noBtn">Không 😢</button>
+    </div>
+</div>
+
+<!-- MODAL CẢM ƠN EM -->
+<div id="thankYouOverlay"></div>
+<div id="thankYouModal">
+    <p>Cảm ơn em vì đã luôn ở bên mình.<br>Chúng mình sẽ có thật nhiều kỷ niệm đẹp hơn nữa nhé!</p>
+</div>
+
+<!-- CÂY THÔNG -->
+<img src="noel_tree.png" class="home-tree home-tree-left">
+<img src="noel_tree.png" class="home-tree home-tree-right">
+<img src="noel_tree.png" class="message-tree message-tree-left">
+<img src="noel_tree.png" class="message-tree message-tree-right">
+
+<!-- Modal ảnh -->
+<div id="myModal" class="modal">
+    <span class="close" onclick="closeModal()">×</span>
+    <img class="modal-content" id="modalImg">
+</div>
+
+<!-- Nút nhạc -->
+<div id="musicToggle" onclick="toggleMusic()">🎵</div>
+
+<audio id="backgroundMusic" autoplay></audio>
+
+<script>
+    let isUnlocked = false;
+
+    // Dòng này dùng để test nhanh (hết countdown sau 2 phút)
+    const christmasDate = new Date(Date.now() + 12000).getTime();
+
+    // Khi dùng thật vào Giáng sinh 2025, bỏ comment dòng dưới và comment dòng trên
+    //const christmasDate = new Date('2025-12-24T00:00:00').getTime();
+
+    const countdownElement = document.getElementById('countdown');
+    const greetingTitle = document.querySelector('#home h1');
+    const allCardContainers = document.querySelectorAll('.card-container');
+
+    // Modal chúc mừng khi hết giờ
+    const successOverlay = document.createElement('div');
+    successOverlay.id = 'successOverlay';
+    successOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:4998;display:flex;justify-content:center;align-items:center;opacity:0;visibility:hidden;transition:opacity 0.6s ease;';
+
+    const successModal = document.createElement('div');
+    successModal.style.cssText = 'background:rgba(255,255,255,0.98);padding:50px;border-radius:40px;text-align:center;box-shadow:0 20px 100px gold;max-width:600px;width:90%;transform:scale(0.7);opacity:0;visibility:hidden;transition:all 0.6s cubic-bezier(0.175,0.885,0.32,1.275);';
+    successModal.innerHTML = `
+        <h3 style="font-family:'Great Vibes',cursive;font-size:4.5em;color:#d40000;text-shadow:0 0 30px gold;margin-bottom:30px;">
+            Giáng Sinh Đến Rồi! 🎄❤️
+        </h3>
+        <p style="font-size:2.8em;color:#333;line-height:1.6;">
+            Chúc em một mùa Giáng sinh thật ấm áp, vui vẻ và tràn đầy yêu thương!<br>
+            Giờ em có thể mở thiệp, xem ảnh và gửi lời chúc rồi đấy ❤️
+        </p>
+        <button style="margin-top:40px;padding:15px 50px;font-size:2.2em;background:linear-gradient(45deg,#ff0000,#ff6b6b);color:white;border:none;border-radius:40px;cursor:pointer;box-shadow:0 0 40px rgba(255,0,0,0.7);">
+            Đóng
+        </button>
+    `;
+
+    successOverlay.appendChild(successModal);
+    document.body.appendChild(successOverlay);
+
+    successModal.querySelector('button').onclick = () => {
+        successOverlay.style.opacity = '0';
+        successOverlay.style.visibility = 'hidden';
+        successModal.style.opacity = '0';
+        successModal.style.visibility = 'hidden';
+        successModal.style.transform = 'scale(0.7)';
+    };
+
+    successOverlay.onclick = (e) => {
+        if (e.target === successOverlay) {
+            successOverlay.style.opacity = '0';
+            successOverlay.style.visibility = 'hidden';
+            successModal.style.opacity = '0';
+            successModal.style.visibility = 'hidden';
+            successModal.style.transform = 'scale(0.7)';
+        }
+    };
+
+    function showSuccessModal() {
+        successOverlay.style.opacity = '1';
+        successOverlay.style.visibility = 'visible';
+        successModal.style.opacity = '1';
+        successModal.style.visibility = 'visible';
+        successModal.style.transform = 'scale(1)';
+    }
+
+    function updateCountdown() {
+        const now = new Date().getTime();
+        let distance = christmasDate - now;
+
+        if (distance <= 0 && !isUnlocked) {
+            isUnlocked = true;
+
+            countdownElement.style.display = 'none';
+            greetingTitle.style.display = 'block';
+
+            allCardContainers.forEach(container => {
+                container.classList.add('unlocked');
+            });
+
+            showSuccessModal();
+        }
+
+        distance = Math.max(0, distance);
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById('days').innerText = days.toString().padStart(2, '0');
+        document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
+        document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
+        document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
+
+        document.getElementById('daysWarning').innerText = days.toString().padStart(2, '0');
+        document.getElementById('hoursWarning').innerText = hours.toString().padStart(2, '0');
+        document.getElementById('minutesWarning').innerText = minutes.toString().padStart(2, '0');
+        document.getElementById('secondsWarning').innerText = seconds.toString().padStart(2, '0');
+    }
+
+    greetingTitle.style.display = 'none';
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // Chỉ chặn click khi chưa unlock
+    allCardContainers.forEach(container => {
+        container.addEventListener('click', (e) => {
+            if (!isUnlocked) {
+                e.preventDefault();
+                e.stopPropagation();
+                showWarningModal();
+            }
+        });
+    });
+
+    function showWarningModal() {
+        document.getElementById('warningOverlay').classList.add('active');
+        document.getElementById('warningModal').classList.add('active');
+    }
+
+    function closeWarningModal() {
+        document.getElementById('warningOverlay').classList.remove('active');
+        document.getElementById('warningModal').classList.remove('active');
+    }
+
+    document.getElementById('closeWarningBtn').addEventListener('click', closeWarningModal);
+    document.getElementById('warningOverlay').addEventListener('click', closeWarningModal);
+
+    function trySwitchTab(id) {
+        if (!isUnlocked && id !== 'home') {
+            showWarningModal();
+            return;
+        }
+        showSection(id);
+    }
+
+    function showSection(id) {
+        const currentActive = document.querySelector('section.active');
+        if (currentActive) currentActive.classList.remove('active');
+
+        setTimeout(() => {
+            document.getElementById(id).classList.add('active');
+            window.scrollTo(0, 0);
+            document.querySelectorAll('.menu-items a').forEach(a => a.classList.remove('active'));
+            document.querySelector(`.menu-items a[onclick="trySwitchTab('${id}')"]`).classList.add('active');
+        }, 50);
+    }
+
+    const modal = document.getElementById('myModal');
+    function openModal(src) { modal.classList.add('active'); document.getElementById('modalImg').src = src; }
+    function closeModal() { modal.classList.remove('active'); }
+    modal.addEventListener('click', (e) => { if (e.target === modal || e.target.classList.contains('close')) closeModal(); });
+
+    const music = document.getElementById('backgroundMusic');
+    const originalTracks = ['merry_christmas.mp3', 'Santa_Tell_Me.mp3', 'jingle_bells.mp3'];
+    let tracks = [...originalTracks];
+    for (let i = tracks.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [tracks[i], tracks[j]] = [tracks[j], tracks[i]];
+    }
+    let currentTrackIndex = 0;
+    music.volume = 0.3;
+    function loadCurrentTrack() { music.src = tracks[currentTrackIndex]; }
+    function playMusic() { music.play().catch(() => { document.getElementById('musicToggle').innerHTML = '🔇'; }); }
+    window.addEventListener('load', () => { loadCurrentTrack(); playMusic(); document.getElementById('musicToggle').innerHTML = '🎵'; });
+    music.addEventListener('ended', () => { currentTrackIndex = (currentTrackIndex + 1) % tracks.length; loadCurrentTrack(); playMusic(); });
+    function toggleMusic() { music.paused ? (playMusic(), document.getElementById('musicToggle').innerHTML = '🎵') : (music.pause(), document.getElementById('musicToggle').innerHTML = '🔇'); }
+
+    let snowInterval = null;
+    function createSnow() {
+        const snow = document.createElement('div');
+        snow.classList.add('snowflake');
+        snow.innerHTML = ['❄', '✨', '❅', '⭐', '🎄'][Math.floor(Math.random()*5)];
+        snow.style.left = Math.random() * 100 + 'vw';
+        snow.style.animationDuration = Math.random() * 5 + 5 + 's';
+        snow.style.opacity = Math.random() * 0.8 + 0.2;
+        snow.style.fontSize = Math.random() * 20 + 15 + 'px';
+        document.body.appendChild(snow);
+        snow.addEventListener('animationend', () => snow.remove());
+    }
+    function startSnow() { if (!snowInterval) snowInterval = setInterval(createSnow, 150); }
+    function stopSnow() { if (snowInterval) { clearInterval(snowInterval); snowInterval = null; } }
+    document.addEventListener('visibilitychange', () => document.hidden ? stopSnow() : startSnow());
+    startSnow();
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const grid = document.getElementById('photosGrid');
+        const totalPhotos = 25;
+        let indices = Array.from({length: totalPhotos}, (_, i) => i + 1);
+        for (let i = indices.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [indices[i], indices[j]] = [indices[j], indices[i]];
+        }
+        indices.forEach(num => {
+            const rotate = (Math.random() * 24 - 12).toFixed(2);
+            const div = document.createElement('div');
+            div.className = 'photo-frame';
+            div.style.setProperty('--rotate', rotate + 'deg');
+            div.onclick = () => openModal(`img_em/${num}.jpg`);
+            const img = document.createElement('img');
+            img.src = `img_em/${num}.jpg`;
+            img.alt = `Ảnh ${num}`;
+            img.loading = "lazy";
+            div.appendChild(img);
+            grid.appendChild(div);
+        });
+    });
+
+    const messageWrapper = document.querySelector('#home .back .message-wrapper');
+    const revealBtn = document.getElementById('revealReplyBtn');
+    const replyOverlay = document.getElementById('replyOverlay');
+    const replyModal = document.getElementById('replyModal');
+    const sendBtn = document.getElementById('sendReplyBtn');
+    const replyTextarea = document.getElementById('replyTextarea');
+    const replyMessage = document.getElementById('replyMessage');
+
+    messageWrapper.addEventListener('scroll', () => {
+        if (messageWrapper.scrollHeight - messageWrapper.scrollTop - messageWrapper.clientHeight < 100) {
+            revealBtn.classList.add('visible');
+        }
+    });
+
+    function openReplyModal() {
+        replyOverlay.classList.add('active');
+        replyModal.classList.add('active');
+    }
+
+    function closeReplyModal() {
+        replyOverlay.classList.remove('active');
+        replyModal.classList.remove('active');
+        replyMessage.style.display = 'none';
+    }
+
+    revealBtn.addEventListener('click', openReplyModal);
+    replyOverlay.addEventListener('click', closeReplyModal);
+
+    sendBtn.addEventListener('click', () => {
+        if (replyTextarea.value.trim() === '') {
+            alert('Em viết gì đó cho anh đi mà 🥺');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('Lời chúc Giáng sinh', replyTextarea.value);
+        formData.append('_subject', 'Lời chúc Giáng sinh mới từ em ấy! 🎄❤️');
+        formData.append('_captcha', 'false');
+
+        sendBtn.innerHTML = 'Đang gửi... 💌';
+        sendBtn.disabled = true;
+
+        fetch('https://formsubmit.co/tri12345678s@gmail.com', {
+            method: 'POST',
+            body: formData
+        }).then(() => {
+            replyMessage.style.display = 'block';
+            replyTextarea.value = '';
+            sendBtn.innerHTML = 'Gửi đi 💌';
+            sendBtn.disabled = false;
+        }).catch(() => {
+            alert('Lỗi gửi, thử lại nhé!');
+            sendBtn.innerHTML = 'Gửi đi 💌';
+            sendBtn.disabled = false;
+        });
+    });
+
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    const endGalleryOverlay = document.getElementById('endGalleryOverlay');
+    const endGalleryModal = document.getElementById('endGalleryModal');
+    const thankYouOverlay = document.getElementById('thankYouOverlay');
+    const thankYouModal = document.getElementById('thankYouModal');
+
+    loadMoreBtn.addEventListener('click', () => {
+        endGalleryOverlay.classList.add('active');
+        endGalleryModal.classList.add('active');
+    });
+
+    function closeEndGalleryModal() {
+        endGalleryOverlay.classList.remove('active');
+        endGalleryModal.classList.remove('active');
+    }
+
+    endGalleryOverlay.addEventListener('click', closeEndGalleryModal);
+
+    document.getElementById('yesBtn').addEventListener('click', () => {
+        fetch('https://formsubmit.co/tri12345678s@gmail.com', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                'Câu trả lời': 'Có chứ ❤️',
+                '_subject': 'Em ấy chọn: Có chứ ❤️',
+                '_captcha': 'false'
+            })
+        }).then(() => {
+            closeEndGalleryModal();
+            thankYouOverlay.classList.add('active');
+            thankYouModal.classList.add('active');
+        });
+    });
+
+    document.getElementById('noBtn').addEventListener('click', () => {
+        fetch('https://formsubmit.co/tri12345678s@gmail.com', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                'Câu trả lời': 'Không 😢',
+                '_subject': 'Em ấy chọn: Không 😢',
+                '_captcha': 'false'
+            })
+        }).then(() => {
+            closeEndGalleryModal();
+        });
+    });
+
+    thankYouOverlay.addEventListener('click', () => {
+        thankYouOverlay.classList.remove('active');
+        thankYouModal.classList.remove('active');
+    });
+
+    // Xử lý xoay ngang cho mobile
+    function checkOrientation() {
+        if (window.innerWidth < 768) {
+            if (window.innerHeight > window.innerWidth) {
+                document.body.classList.add('portrait');
+            } else {
+                document.body.classList.remove('portrait');
+            }
+        } else {
+            document.body.classList.remove('portrait');
+        }
+    }
+
+    window.addEventListener('resize', checkOrientation);
+    window.addEventListener('orientationchange', checkOrientation);
+    checkOrientation();
+</script>
+
+</body>
+</html>

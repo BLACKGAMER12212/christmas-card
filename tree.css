@@ -1,0 +1,14 @@
+.christmas-tree-container {
+    margin: 80px auto;
+    max-width: 600px;
+}
+.christmas-tree {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 0 80px gold;
+    animation: treeGlow 5s infinite alternate;
+}
+@keyframes treeGlow {
+    0% { opacity: 0.9; filter: brightness(1); }
+    100% { opacity: 1; filter: brightness(1.4); }
+}
