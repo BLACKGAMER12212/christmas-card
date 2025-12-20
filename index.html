@@ -1369,6 +1369,8 @@
         formData.append('Lời chúc Giáng sinh', replyTextarea.value);
         formData.append('_subject', 'Lời chúc Giáng sinh mới từ em ấy! 🎄❤️');
         formData.append('_captcha', 'false');
+       // THÊM DÒNG NÀY: Để FormSubmit biết nguồn gốc trang (thay bằng URL thực tế của bạn trên GitHub Pages)
+    formData.append('_url', window.location.href);  // Hoặc giá trị cố định như 'https://tên-user.github.io/repo/'
 
         sendBtn.innerHTML = 'Đang gửi... 💌';
         sendBtn.disabled = true;
@@ -1413,7 +1415,8 @@
             body: JSON.stringify({
                 'Câu trả lời': 'Có chứ ❤️',
                 '_subject': 'Em ấy chọn: Có chứ ❤️',
-                '_captcha': 'false'
+                '_captcha': 'false',
+                '_url': window.location.href
             })
         }).then(() => {
             closeEndGalleryModal();
@@ -1429,7 +1432,8 @@
             body: JSON.stringify({
                 'Câu trả lời': 'Không 😢',
                 '_subject': 'Em ấy chọn: Không 😢',
-                '_captcha': 'false'
+                '_captcha': 'false',
+                '_url': window.location.href
             })
         }).then(() => {
             closeEndGalleryModal();
@@ -1460,6 +1464,4 @@
 </script>
 
 </body>
-
 </html>
-
