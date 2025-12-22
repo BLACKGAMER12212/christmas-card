@@ -15,9 +15,6 @@
   border-radius: 30px !important; /* Bo viền cong như ảnh 1, thêm !important để override nếu cần */
   max-width: 800px !important; /* Kéo dài sang hai bên, chỉnh số này để rộng hơn nếu cần (ví dụ: 900px hoặc 1000px) */
 }
-#noteContent {
-  font-size: 10em; /* Tăng kích thước nội dung lên 3em (từ 2.5em), chỉnh số này nếu muốn to hơn nữa, ví dụ 3.5em */
-}
 
         @keyframes neonRed {
             0%, 100% { text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 15px #ff0000, 0 0 20px #ff0000; }
@@ -318,7 +315,7 @@
         #noteModal { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.7); width: 90%; max-width: 600px; background: rgba(255,255,255,0.95); border-radius: 0; padding: 40px; box-shadow: 0 20px 80px rgba(255,215,0,0.8); z-index: 3999; opacity: 0; visibility: hidden; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-align: center; max-height: 60vh; overflow-y: auto; }
         #noteModal.active { opacity: 1; visibility: visible; transform: translate(-50%, -50%) scale(1); }
         #noteTitle { font-family: 'Great Vibes', cursive; font-size: 4em; color: #d40000; text-shadow: 0 0 20px gold; margin-bottom: 30px; }
-        #noteContent { font-family: 'Dancing Script', cursive; font-size: 1.8em; color: #333; margin-bottom: 40px; text-align: left; line-height: 1.4; }
+        #noteContent { font-family: 'Dancing Script', cursive;    font-size: 2.2em; color: #333; margin-bottom: 40px; text-align: left; line-height: 1.4; }
         #closeNoteBtn { padding: 15px 40px; font-size: 2em; background: linear-gradient(45deg, #ff0000, #ff6b6b); color: white; border: none; border-radius: 30px; cursor: pointer; box-shadow: 0 0 30px rgba(255,0,0,0.6); transition: 0.3s; }
         #closeNoteBtn:hover { transform: scale(1.1); box-shadow: 0 0 50px rgba(255,0,0,0.8); }
 
