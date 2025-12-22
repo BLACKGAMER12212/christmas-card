@@ -3,9 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giáng Sinh Của Em ❤️</title>
+    <title>Kỷ Niệm Giáng Sinh Với Em ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        #noteModal {
+  max-height: none; /* Loại bỏ giới hạn chiều cao để không cần scroll */
+  overflow-y: hidden; /* Ẩn thanh scroll hoàn toàn */
+}
+#noteModal {
+  border-radius: 30px !important; /* Bo viền cong như ảnh 1, thêm !important để override nếu cần */
+  max-width: 800px !important; /* Kéo dài sang hai bên, chỉnh số này để rộng hơn nếu cần (ví dụ: 900px hoặc 1000px) */
+}
+
+
         @keyframes neonRed {
             0%, 100% { text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 15px #ff0000, 0 0 20px #ff0000; }
             50% { text-shadow: 0 0 2px #ff0000, 0 0 5px #ff0000, 0 0 8px #ff0000, 0 0 10px #ff0000; }
@@ -233,23 +243,27 @@
         #rotateMessage .icon { font-size: 4em; margin-bottom: 20px; animation: rotateAnimation 2s infinite; }
         @keyframes rotateAnimation { 0% { transform: rotate(0deg); } 50% { transform: rotate(90deg); } 100% { transform: rotate(0deg); } }
 
-/* NOTES - Chỉ hiện ở trang Message */
-/* NOTES - Chỉ hiện ở trang Message */
+/* NOTES - Luôn fixed theo scroll như cây thông */
+/* NOTES - Fixed theo scroll + luôn hiện trên cây thông */
 .notes-container {
-    position: absolute; 
-    top: 0; left: 0; width: 100%; height: 100%;
+    position: fixed; /* Đổi từ absolute sang fixed để note dính màn hình */
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
     pointer-events: none; 
-    z-index: 200; /* Rất cao, vượt qua cây thông (10) và mọi thứ khác */
+    z-index: 100; /* Cao hơn cây thông */
 }
 
 .notes-left, .notes-right {
-    position: fixed; 
+    position: fixed; /* Đảm bảo fixed */
     top: 50%; 
     transform: translateY(-50%);
     display: flex; 
     flex-direction: column; 
     gap: 70px; 
     pointer-events: auto;
+    z-index: 110;
 }
 .notes-left { left: -240px; }
 .notes-right { right: -240px; }
@@ -260,12 +274,13 @@
     display: flex; align-items: center; justify-content: center;
     cursor: pointer;
     transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    position: relative; /* Quan trọng: để z-index hoạt động */
-    z-index: 210; /* Cao hơn container */
+    position: relative;
+    z-index: 120;
 }
- /* Khi hover: note chắc chắn hiện trên cùng */
+
+/* Khi hover kéo ra: note hiện rõ trên mọi thứ */
 .note:hover {
-    z-index: 9999 !important; /* Cực cao → không gì che được */
+    z-index: 9999 !important;
 }
 
 .left-note { background-image: url('note.png'); }
@@ -281,26 +296,26 @@
 .note:hover .note-text { opacity: 1; }
 
 .left-note .note-text { margin-left: 0; }
-.left-note:hover .note-text { margin-left: 70px; }
+.left-note:hover .note-text { margin-left: 30px; }
 .right-note .note-text { margin-right: 0; }
-.right-note:hover .note-text { margin-right: 70px; }
-        @media (max-width: 767px) {
-            .notes-left { left: -200px; gap: 50px; }
-            .notes-right { right: -200px; }
-            .note { width: 300px; height: 100px; }
-            .left-note:hover { transform: translateX(170px) !important; }
-            .right-note:hover { transform: translateX(-170px) !important; }
-            .note-text { font-size: 26px; }
-            .left-note:hover .note-text { margin-left: 80px; }
-            .right-note:hover .note-text { margin-right: 80px; }
-        }
+.right-note:hover .note-text { margin-right: 30px; }
 
+@media (max-width: 767px) {
+    .notes-left { left: -200px; gap: 50px; }
+    .notes-right { right: -200px; }
+    .note { width: 300px; height: 100px; }
+    .left-note:hover { transform: translateX(170px) !important; }
+    .right-note:hover { transform: translateX(-170px) !important; }
+    .note-text { font-size: 26px; }
+    .left-note:hover .note-text { margin-left: 80px; }
+    .right-note:hover .note-text { margin-right: 80px; }
+}
         #noteOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0); z-index: 3998; opacity: 0; visibility: hidden; transition: opacity 0.4s ease; }
         #noteOverlay.active { opacity: 1; visibility: visible; background: rgba(0,0,0,0.6); }
-        #noteModal { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.7); width: 90%; max-width: 600px; background: rgba(255,255,255,0.95); border-radius: 30px; padding: 40px; box-shadow: 0 20px 80px rgba(255,215,0,0.8); z-index: 3999; opacity: 0; visibility: hidden; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-align: center; }
+        #noteModal { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.7); width: 90%; max-width: 600px; background: rgba(255,255,255,0.95); border-radius: 0; padding: 40px; box-shadow: 0 20px 80px rgba(255,215,0,0.8); z-index: 3999; opacity: 0; visibility: hidden; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-align: center; max-height: 60vh; overflow-y: auto; }
         #noteModal.active { opacity: 1; visibility: visible; transform: translate(-50%, -50%) scale(1); }
         #noteTitle { font-family: 'Great Vibes', cursive; font-size: 4em; color: #d40000; text-shadow: 0 0 20px gold; margin-bottom: 30px; }
-        #noteContent { font-size: 2.5em; color: #333; margin-bottom: 40px; }
+        #noteContent { font-family: 'Dancing Script', cursive; font-size: 1.8em; color: #333; margin-bottom: 40px; text-align: left; line-height: 1.4; }
         #closeNoteBtn { padding: 15px 40px; font-size: 2em; background: linear-gradient(45deg, #ff0000, #ff6b6b); color: white; border: none; border-radius: 30px; cursor: pointer; box-shadow: 0 0 30px rgba(255,0,0,0.6); transition: 0.3s; }
         #closeNoteBtn:hover { transform: scale(1.1); box-shadow: 0 0 50px rgba(255,0,0,0.8); }
 
@@ -324,6 +339,9 @@
             #loadMoreBtn { font-size: 2em; padding: 10px 30px; }
             body.portrait #rotateMessage { display: flex; }
             body.portrait > *:not(#rotateMessage) { display: none; }
+            #noteModal { max-width: 90%; padding: 20px; }
+            #noteTitle { font-size: 3em; }
+            #noteContent { font-size: 1.5em; }
         }
     </style>
 </head>
@@ -441,26 +459,26 @@
            <div class="notes-container">
                 <div class="notes-left">
                     <!-- Note mới ở trên cùng (bên trái) -->
-                    <div class="note left-note" data-type="nho-em">
-                        <div class="note-text">Nhớ em</div>
-                    </div>
                     <div class="note left-note" data-type="ap-luc">
-                        <div class="note-text">Có chuyện buồn</div>
+                        <div class="note-text">Áp Lực</div>
                     </div>
-                    <div class="note left-note" data-type="met-moi">
-                        <div class="note-text">Mệt mỏi</div>
+                    <div class="note left-note" data-type="kiet-suc">
+                        <div class="note-text">Kiệt Sức</div>
+                    </div>
+                    <div class="note left-note" data-type="phan-van">
+                        <div class="note-text">Phân Vân</div>
                     </div>
                 </div>
                 <div class="notes-right">
                     <!-- Note mới ở trên cùng (bên phải) -->
-                    <div class="note right-note" data-type="yeu-em">
-                        <div class="note-text">Yêu em</div>
+                    <div class="note right-note" data-type="tui-than">
+                        <div class="note-text">Tủi Thân</div>
                     </div>
-                    <div class="note right-note" data-type="dang-khoc">
-                        <div class="note-text">Đang khóc</div>
+                    <div class="note right-note" data-type="burnout">
+                        <div class="note-text">Burnout</div>
                     </div>
-                    <div class="note right-note" data-type="buon">
-                        <div class="note-text">Buồn</div>
+                    <div class="note right-note" data-type="lo-tuong-lai">
+                        <div class="note-text">Tương Lai</div>
                     </div>
                 </div>
             </div>
@@ -789,29 +807,29 @@
                 let title = '';
                 let message = '';
                 switch (type) {
-                    case 'nho-em':
-                        title = 'Nhớ em';
-                        message = 'Anh đang nhớ em rất nhiều... Chỉ muốn ôm em một cái thật chặt ngay bây giờ. ❤️';
-                        break;
-                    case 'yeu-em':
-                        title = 'Yêu em';
-                        message = 'Anh yêu em, hôm nay, ngày mai, và mãi mãi sau này. Không cần lý do, chỉ cần là em. ❤️';
-                        break;
                     case 'ap-luc':
-                        title = 'Áp lực';
-                        message = 'Em đang cảm thấy áp lực hả? Anh biết năm lớp 12 khó khăn lắm, nhưng em giỏi giang và mạnh mẽ. Hãy nghỉ ngơi một chút, anh luôn ở đây để lắng nghe em. Chúng ta sẽ vượt qua cùng nhau! ❤️';
+                        title = 'Nếu đang áp lực';
+                        message = 'Mình biết dạo này áp lực từ mọi người, từ gia đình, từ thầy cô làm em căng thẳng lắm, mình hiểu mà. Học hành, kỳ vọng, rồi đủ thứ chuyện đè lên vai em suốt. Nhưng mà em không cần phải một mình đối mặt hết mọi thứ đâu, cũng chẳng cần phải cố gắng hoàn hảo vì thật sự chẳng ai trên đời làm được hết cả. Cứ làm chính mình thôi, thích gì làm nấy, sai ở đâu thì đứng dậy ở đó sẽ luôn có 1 người đỡ em, sửa dần dần là được. Mình sẽ luôn ở đây, lúc nào em cần nói chuyện hay cần ai đó lắng nghe thì cứ nhắn mình nhé. Mình chỉ muốn em nhẹ nhàng hơn một chút thôi.';
                         break;
-                    case 'met-moi':
-                        title = 'Mệt mỏi';
-                        message = 'Em mệt rồi sao? Hãy để anh gửi cho em một cái ôm ấm áp. Nhớ ăn uống đầy đủ và ngủ ngon nhé. Anh tự hào về em lắm! 🎄';
+                    case 'kiet-suc':
+                        title = 'Nếu đang kiệt sức';
+                        message = 'Lớp 12 học hành đã nặng rồi, mà mình biết em còn mệt vì đủ thứ chuyện xung quanh nữa. Chuyện bạn bè lúc hợp lúc không, chuyện ở nhà gia đình hay nói này nói nọ, rồi mọi người xung quanh cứ vô tình làm em nghĩ ngợi nhiều. Mình thấy em cố gắng giữ mọi thứ ổn nhưng như vậy không tốt. Em đừng cố ép bản thân gồng tiếp nữa nhé. Nghỉ ngơi đi, ngủ một giấc dài, nằm ì nghe nhạc hay làm gì em thích cũng được, ổn định lại trạng thái rồi mọi thứ như học tập làm việc sẽ đều tốt hơn đó. Mình lo em ốm, lo em mệt quá hơn là lo điểm số hay bất cứ chuyện gì khác. Mình chỉ muốn em khỏe lại, nhẹ nhàng hơn thôi. Em mệt thì cứ nói với mình, mình ở đây mà.';
                         break;
-                    case 'dang-khoc':
-                        title = 'Đang khóc';
-                        message = 'Em khóc à? Anh ước gì có thể lau nước mắt cho em ngay bây giờ. Mọi chuyện sẽ ổn thôi, anh tin em. Hãy kể cho anh nghe nếu em muốn. Yêu em! 😘';
+                    case 'phan-van':
+                        title = 'Nếu đang phân vân';
+                        message = 'Có những ngày em thấy mọi thứ rối quá, chẳng biết làm sao, lòng lúc lên lúc xuống mình hiểu cảm giác đó lắm. Em muốn ở một mình, không muốn nói chuyện với ai, muốn tắt máy nằm một chỗ cũng được hết. Mình không ép em vui hay phải nói chuyện đâu, cứ làm gì thấy thoải mái nhất. Mình vẫn ở đây thôi, không đi đâu cả. Lúc nào em muốn kể, muốn tâm sự thì cứ nhắn mình, mình luôn lắng nghe, hiểu để cùng nhau đối diện với vấn đề.';
                         break;
-                    case 'buon':
-                        title = 'Buồn';
-                        message = 'Em đang buồn hả? Anh ở đây để làm em vui. Nhớ những kỷ niệm đẹp của chúng ta đi, và anh sẽ tạo thêm nhiều nữa. Cười lên nào, công chúa của anh! 🌟';
+                    case 'tui-than':
+                        title = 'Nếu đang tủi thân';
+                        message = 'Tự nhiên thấy buồn buồn, sống mũi cay cay muốn khóc thì em cứ khóc đi, đừng giữ trong lòng nữa nhé. Mình biết em hay giấu, hay giả vờ ổn nhưng thật ra chịu đựng một mình lâu rồi. Có nhiều chuyện nhỏ nhỏ cũng làm em buồn, mình hiểu mà. Khóc xong sẽ nhẹ người hơn nhiều, xả bớt được mấy thứ đang đè trong lòng. Mình ở bên em mà, khóc với mình cũng được, mình không cười em đâu, không nghĩ em yếu đuối gì hết. Mình chỉ muốn em thoải mái thôi, khóc xong rồi mình cùng làm gì đó, call làm bài hoặc cho mình sang đưa chút thứ dễ thương cho em nhé';
+                        break;
+                    case 'burnout':
+                        title = 'Burnout';
+                        message = 'Burnout không phải vì em kém hay bỏ cuộc, mà vì em đã cố gắng quá nhiều trong một thời gian dài. Em đã rất giỏi rồi, đã nỗ lực, đã tự gồng mình đi qua quá nhiều áp lực mà ít khi cho bản thân được nghỉ. Có thể bây giờ em thấy mệt, thấy trống rỗng, thấy mình không còn là chính mình như trước nhưng điều đó không làm em kém đi chút nào. Nó chỉ nói rằng em không cần phải mạnh mẽ thêm nữa, cũng không cần ép mình phải ổn ngay, dừng lại một chút, chậm hơn một chút để đối xử dịu dàng lại với chính mình';
+                        break;
+                    case 'lo-tuong-lai':
+                        title = 'Lo cho tương lai';
+                        message = 'Dạo này em hay nghĩ lung tung về sau thi đại học, sợ không đỗ, sợ không biết chọn ngành gì hay sau này làm gì, mình cũng lo y chang em luôn. Lớp 12 đứa nào chả thế. Nhưng mà này, một kỳ thi không quyết định hết cuộc đời đâu, còn nhiều cơ hội lắm. Tụi mình cứ cố gắng hết mình là chắc chắn làm được thôi, mình tự hào về em lắm. Mình ở đây, cùng em nghĩ xem nên làm gì tiếp, cùng em ôn thi hay bàn kế hoạch. Mọi thứ sẽ ổn thôi, mình tin em mà, cứ từ từ nhé.';
                         break;
                 }
                 noteTitle.innerText = title;
