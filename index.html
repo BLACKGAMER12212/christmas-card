@@ -6,15 +6,18 @@
     <title>Kỷ Niệm Giáng Sinh Với Em ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        #noteModal {
-  max-height: none; /* Loại bỏ giới hạn chiều cao để không cần scroll */
-  overflow-y: hidden; /* Ẩn thanh scroll hoàn toàn */
+#noteModal {
+  max-height: none !important; /* Loại bỏ giới hạn chiều cao để không cần scroll */
+  overflow-y: hidden !important; /* Ẩn thanh scroll hoàn toàn */
+  height: auto !important; /* Cho phép chiều cao tự động điều chỉnh theo nội dung */
 }
 #noteModal {
   border-radius: 30px !important; /* Bo viền cong như ảnh 1, thêm !important để override nếu cần */
   max-width: 800px !important; /* Kéo dài sang hai bên, chỉnh số này để rộng hơn nếu cần (ví dụ: 900px hoặc 1000px) */
 }
-
+#noteContent {
+  font-size: 10em; /* Tăng kích thước nội dung lên 3em (từ 2.5em), chỉnh số này nếu muốn to hơn nữa, ví dụ 3.5em */
+}
 
         @keyframes neonRed {
             0%, 100% { text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 15px #ff0000, 0 0 20px #ff0000; }
