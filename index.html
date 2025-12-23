@@ -525,7 +525,7 @@
         document.addEventListener('contextmenu', function(e) { e.preventDefault(); return false; });
 
         let isUnlocked = false;
-        const christmasDate = new Date('2025-12-23T17:39:00').getTime();
+        const christmasDate = new Date('2025-12-24T00:00:00').getTime();
         const countdownElement = document.getElementById('countdown');
         const greetingTitle = document.querySelector('#home h1');
         const allCardContainers = document.querySelectorAll('.card-container');
@@ -858,7 +858,7 @@ if (notesLeft && notesRight) {
         const scrollY = window.scrollY || window.pageYOffset;
         
         // Speed = 1.0 → di chuyển đúng 100% theo scroll (kéo xuống 100px → note xuống đúng 100px)
-        const translateY =  -240+ scrollY * 1.0;
+        const translateY =  -250+ scrollY * 1.0;
         
         notesLeft.style.transform = `translateY(${translateY}px)`;
         notesRight.style.transform = `translateY(${translateY}px)`;
@@ -867,5 +867,6 @@ if (notesLeft && notesRight) {
     </script>
 </body>
 </html>
+
 
 
